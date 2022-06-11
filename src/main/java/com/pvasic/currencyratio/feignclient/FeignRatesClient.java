@@ -12,6 +12,7 @@ public interface FeignRatesClient {
     ExchangeRate getLatestRate(@RequestParam("app_id") String appId);
 
     @GetMapping(value = "/historical/{date}.json")
-    ExchangeRate getHistoricalRate(@PathVariable String date,
-                                   @RequestParam("app_id") String appId);
+    ExchangeRate getHistoricalRate(
+            @PathVariable String date,
+            @RequestParam("app_id") String appId);
 }

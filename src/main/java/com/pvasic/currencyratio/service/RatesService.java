@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.pvasic.currencyratio.util.DateUtil.getYesterdayDate;
 
 @Service
@@ -24,5 +27,10 @@ public class RatesService {
         ExchangeRate currentRate = ratesClient.getLatestRate(yourId);
         ExchangeRate yesterdayRate = ratesClient.getHistoricalRate(getYesterdayDate(), yourId);
         return currentRate.getRates().get(code) > yesterdayRate.getRates().get(code);
+    }
+
+    public List<String> getCodes() {
+        ExchangeRate currentRate = ratesClient.getLatestRate(yourId);
+        return new ArrayList<>(currentRate.getRates().keySet());
     }
 }

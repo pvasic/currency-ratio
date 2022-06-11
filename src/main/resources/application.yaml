@@ -12,8 +12,18 @@ openexchangerates:
   url: https://openexchangerates.org/api
   your-id: dd19753a9ccb451fba84b58474cf5cb1
 
+#giphy.com
+giphy:
+  url: https://api.giphy.com/v1/gifs/search
+  api-key: ldgRqnBfvkg4ZtfwDuhm44BStP3hpCAu
+  rich: rich
+  broke: broke
+
 #logger
 logging:
   level:
     root: WARN
     com.pvasic.currencyratio: DEBUG
+
+server:
+  port: 8080
