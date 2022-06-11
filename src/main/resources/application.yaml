@@ -1,0 +1,19 @@
+spring:
+  # Jackson Serialization Issue Resolver
+  jackson:
+    visibility:
+      field: any
+      getter: none
+      setter: none
+      is-getter: none
+
+#openexchangerates.org
+openexchangerates:
+  url: https://openexchangerates.org/api
+  your-id: dd19753a9ccb451fba84b58474cf5cb1
+
+#logger
+logging:
+  level:
+    root: WARN
+    com.pvasic.currencyratio: DEBUG
