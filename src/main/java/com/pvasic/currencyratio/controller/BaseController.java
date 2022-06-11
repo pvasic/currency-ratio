@@ -1,9 +1,8 @@
 package com.pvasic.currencyratio.controller;
 
-import com.pvasic.currencyratio.feignclient.FeignRatesClient;
 import com.pvasic.currencyratio.model.ExchangeRate;
+import com.pvasic.currencyratio.service.RatesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,20 +16,17 @@ import java.util.Optional;
 public class BaseController {
     static final String URL = "/api";
 
-    private final FeignRatesClient ratesClient;
-
-    @Value("${openexchangerates.your-id}")
-    private String yourId;
+    private final RatesService ratesService;
 
     @Autowired
-    public BaseController(FeignRatesClient ratesClient) {
-        this.ratesClient = ratesClient;
+    public BaseController(RatesService ratesService) {
+        this.ratesService = ratesService;
     }
 
     @GetMapping("/get-giph-by-code/{code}")
     ResponseEntity<ExchangeRate> getGiphByCode(@PathVariable String code) {
-
+        boolean rise = ratesService.isRateRise(code);
 //        Dummy
-        return ResponseEntity.of(Optional.of(ratesClient.getLatestRate(yourId)));
+        return ResponseEntity.of(Optional.empty());
     }
 }
