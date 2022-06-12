@@ -24,12 +24,12 @@ public class BaseController {
         this.gifService = gifService;
     }
 
-    @GetMapping("/get-codes")
+    @GetMapping("/codes")
     List<String> getCodes() {
         return ratesService.getCodes();
     }
 
-    @GetMapping("/get-giph-by-code/{code}")
+    @GetMapping("/gifs/{code}")
     String getGifByCode(@PathVariable String code) {
         boolean isRise = ratesService.isRateRise(code);
         return gifService.getGifUrl(isRise);

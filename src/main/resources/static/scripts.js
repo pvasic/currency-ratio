@@ -3,7 +3,7 @@ const general_url = './api/';
 function loadResultGif() {
     let code = $("#codes_select").val();
     $.ajax({
-        url: general_url + 'get-giph-by-code/' + code,
+        url: general_url + 'gifs/' + code,
         method: 'GET',
         dataType: "text",
         complete: function (gifurl) {
@@ -18,7 +18,7 @@ function loadResultGif() {
 
 function loadForSelect() {
     $.ajax({
-        url: general_url + 'get-codes',
+        url: general_url + 'codes',
         method: 'GET',
         complete: function (data) {
             let codesList = JSON.parse(data.responseText);
