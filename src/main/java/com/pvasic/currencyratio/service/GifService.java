@@ -1,17 +1,19 @@
 package com.pvasic.currencyratio.service;
 
 import com.pvasic.currencyratio.feignclient.FeignGiphyClient;
+import com.pvasic.currencyratio.model.gif.Gif;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.Random;
 
 @Service
 public class GifService {
 
-    private final int NUMBER_GIF = 1;
+    private final int NUMBER_GIF = 10;
+
+    private final Random RANDOM = new Random();
 
     private final FeignGiphyClient giphyClient;
 
@@ -29,12 +31,17 @@ public class GifService {
         this.giphyClient = giphyClient;
     }
 
-    public ResponseEntity<Map> getGif(boolean isRise) {
-        if (isRise) {
-            return giphyClient.getGifByPhrase(apiKey, rich, NUMBER_GIF);
-        } else {
-            return giphyClient.getGifByPhrase(apiKey, broke, NUMBER_GIF);
-        }
+    private Gif getGif(boolean isRise) {
+        return isRise
+                ? giphyClient.getGifByPhrase(apiKey, rich, NUMBER_GIF)
+                : giphyClient.getGifByPhrase(apiKey, broke, NUMBER_GIF);
     }
 
+    public String getGifUrl(boolean isRise) {
+        return getGif(isRise).getData()[genRandomPosition()].getImages().getOriginal().getUrl();
+    }
+
+    private int genRandomPosition() {
+        return RANDOM.nextInt((NUMBER_GIF - 1));
+    }
 }

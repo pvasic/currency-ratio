@@ -1,12 +1,3 @@
-spring:
-  # Jackson Serialization Issue Resolver
-  jackson:
-    visibility:
-      field: any
-      getter: none
-      setter: none
-      is-getter: none
-
 #openexchangerates.org
 openexchangerates:
   url: https://openexchangerates.org/api

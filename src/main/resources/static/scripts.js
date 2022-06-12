@@ -5,20 +5,13 @@ function loadResultGif() {
     $.ajax({
         url: general_url + 'get-giph-by-code/' + code,
         method: 'GET',
-        dataType: "json",
-        complete: function (data) {
-            let content = JSON.parse(data.responseText);
+        dataType: "text",
+        complete: function (gifurl) {
             let img = document.createElement("img");
-            let gifName = document.createElement("p");
-            gifName.textContent = content.data[0].title;
-            let gifKey = document.createElement("p");
-            gifKey.textContent = content.compareResult;
-            img.src = content.data[0].images.original.url;
+            img.src = gifurl.responseText;
             let out = document.querySelector("#out");
             out.innerHTML = '';
             out.insertAdjacentElement("afterbegin", img);
-            out.insertAdjacentElement("afterbegin", gifName);
-            out.insertAdjacentElement("afterbegin", gifKey);
         }
     })
 }
