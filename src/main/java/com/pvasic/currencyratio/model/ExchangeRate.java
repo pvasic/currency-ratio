@@ -1,22 +1,16 @@
 package com.pvasic.currencyratio.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Map;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ExchangeRate {
     private Map<String, Double> rates;
-
-    public ExchangeRate() {
-    }
-
-    public ExchangeRate(Map<String, Double> rates) {
-        this.rates = rates;
-    }
-
-    public Map<String, Double> getRates() {
-        return rates;
-    }
-
-    public void setRates(Map<String, Double> rates) {
-        this.rates = rates;
-    }
 }

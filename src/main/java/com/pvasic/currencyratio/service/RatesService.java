@@ -2,7 +2,7 @@ package com.pvasic.currencyratio.service;
 
 import com.pvasic.currencyratio.feignclient.FeignRatesClient;
 import com.pvasic.currencyratio.model.ExchangeRate;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +12,12 @@ import java.util.List;
 import static com.pvasic.currencyratio.util.DateUtil.getYesterdayDate;
 
 @Service
+@RequiredArgsConstructor
 public class RatesService {
     private final FeignRatesClient ratesClient;
 
     @Value("${openexchangerates.your-id}")
     private String yourId;
-
-    @Autowired
-    public RatesService(FeignRatesClient ratesClient) {
-        this.ratesClient = ratesClient;
-    }
 
     public boolean isRateRise(String code) {
         ExchangeRate currentRate = ratesClient.getLatestRate(yourId);

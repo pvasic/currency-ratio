@@ -1,23 +1,16 @@
 package com.pvasic.currencyratio.model.gif;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Images {
     private Original original;
-
-    public Images() {
-    }
-
-    public Images(Original original) {
-        this.original = original;
-    }
-
-    public Original getOriginal() {
-        return original;
-    }
-
-    public void setOriginal(Original original) {
-        this.original = original;
-    }
 }
