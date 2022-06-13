@@ -26,7 +26,7 @@ public class BaseController {
 
     @GetMapping("/gifs/{code}")
     String getGifByCode(@PathVariable String code) {
-        boolean isRise = ratesService.isRateRise(code);
+        boolean isRise = ratesService.isRiseRate(code);
         return gifService.getGifUrl(isRise);
     }
 }

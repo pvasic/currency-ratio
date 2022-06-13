@@ -2,6 +2,7 @@ package com.pvasic.currencyratio.service;
 
 import com.pvasic.currencyratio.feignclient.FeignRatesClient;
 import com.pvasic.currencyratio.model.ExchangeRate;
+import com.pvasic.currencyratio.util.RateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,10 @@ public class RatesService {
     @Value("${openexchangerates.your-id}")
     private String yourId;
 
-    public boolean isRateRise(String code) {
-        ExchangeRate currentRate = ratesClient.getLatestRate(yourId);
-        ExchangeRate yesterdayRate = ratesClient.getHistoricalRate(getYesterdayDate(), yourId);
-        return currentRate.getRates().get(code) > yesterdayRate.getRates().get(code);
+    public boolean isRiseRate(String code) {
+        double currentRate = ratesClient.getLatestRate(yourId).getRates().get(code);
+        double yesterdayRate = ratesClient.getHistoricalRate(getYesterdayDate(), yourId).getRates().get(code);
+        return RateUtil.isRise(currentRate, yesterdayRate);
     }
 
     public List<String> getCodes() {
