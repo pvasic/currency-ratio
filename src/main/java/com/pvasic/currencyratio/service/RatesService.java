@@ -1,5 +1,6 @@
 package com.pvasic.currencyratio.service;
 
+import com.pvasic.currencyratio.error.IllegalRequestDataException;
 import com.pvasic.currencyratio.feignclient.FeignRatesClient;
 import com.pvasic.currencyratio.model.ExchangeRate;
 import com.pvasic.currencyratio.util.RateUtil;
@@ -21,8 +22,16 @@ public class RatesService {
     private String yourId;
 
     public boolean isRiseRate(String code) {
-        double currentRate = ratesClient.getLatestRate(yourId).getRates().get(code);
-        double yesterdayRate = ratesClient.getHistoricalRate(getYesterdayDate(), yourId).getRates().get(code);
+        ExchangeRate cRate = ratesClient.getLatestRate(yourId);
+        ExchangeRate yRate = ratesClient.getHistoricalRate(getYesterdayDate(), yourId);
+
+        if (cRate == null || yRate == null) {
+            throw new IllegalRequestDataException("Rates is null");
+        }
+
+        double currentRate = cRate.getRates().get(code);
+        double yesterdayRate = yRate.getRates().get(code);
+
         return RateUtil.isRise(currentRate, yesterdayRate);
     }
 
