@@ -11,7 +11,7 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class GifService {
-    private final int NUMBER_GIF = 10;
+    public static final int NUMBER_GIF = 10;
     private final Random RANDOM = new Random();
 
     private final FeignGiphyClient giphyClient;
@@ -25,7 +25,7 @@ public class GifService {
     @Value("${giphy.broke}")
     private String broke;
 
-    private Gif getGif(boolean isRise) {
+    public Gif getGif(boolean isRise) {
         return isRise
                 ? giphyClient.getGifByPhrase(apiKey, rich, NUMBER_GIF)
                 : giphyClient.getGifByPhrase(apiKey, broke, NUMBER_GIF);
