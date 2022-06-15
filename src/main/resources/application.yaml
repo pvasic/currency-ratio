@@ -2,6 +2,7 @@
 openexchangerates:
   url: https://openexchangerates.org/api
   your-id: dd19753a9ccb451fba84b58474cf5cb1
+  currency: RUB
 
 #giphy.com
 giphy:
